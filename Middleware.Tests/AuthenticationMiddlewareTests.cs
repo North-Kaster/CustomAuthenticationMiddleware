@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using CustomMiddleware;
 namespace Middleware.Tests;
 
-public class CustomMiddlewareAuthenticationTests : IAsyncLifetime
+public class AuthenticationMiddlewareTests : IAsyncLifetime
 {
     IHost? host;
     public Task DisposeAsync()
@@ -35,9 +35,8 @@ public class CustomMiddlewareAuthenticationTests : IAsyncLifetime
         })
         .StartAsync();
     }
-
     [Fact]
-    public async Task MiddlewareTest_FailWhenNoQuery()
+    public async Task AuthenticationMiddlewareTest_FailWhenNoQuery()
     {
         if (host == null)
         {
@@ -50,7 +49,7 @@ public class CustomMiddlewareAuthenticationTests : IAsyncLifetime
         Assert.Equal("Not authorized.", result);
     }
     [Fact]
-    public async Task MiddlewareTest_FailWhenNoPassword()
+    public async Task AuthenticationMiddlewareTest_FailWhenNoPassword()
     {
         if (host == null)
         {
@@ -63,7 +62,7 @@ public class CustomMiddlewareAuthenticationTests : IAsyncLifetime
         Assert.Equal("Not authorized.", result);
     }
     [Fact]
-    public async Task MiddlewareTest_FailWhenWrongUsernameAndPassword()
+    public async Task AuthenticationMiddlewareTest_FailWhenWrongUsernameAndPassword()
     {
         if (host == null)
         {
@@ -76,7 +75,7 @@ public class CustomMiddlewareAuthenticationTests : IAsyncLifetime
         Assert.Equal("Not authorized.", result);
     }
     [Fact]
-    public async Task MiddlewareTest_AuthenticatedUser()
+    public async Task AuthenticationMiddlewareTest_AuthenticatedUser()
     {
         if (host == null)
         {
